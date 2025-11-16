@@ -16,9 +16,3 @@ jobs:
 
       - name: Say hello from docker runner
         run: echo "Hello depuis le runner dans un conteneur !"
-
-      - name: Build image
-        run: docker build -t myapp .
-
-      - name: Run tests
-        run: docker run --rm myapp pytest

@@ -15,4 +15,4 @@ fi
 
 # Lancer le runner
 echo "Demarrage du runner GitHub Actions..."
-exec ./run.sh
+./run.sh

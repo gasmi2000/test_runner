@@ -9,6 +9,7 @@ jobs:
     runs-on:
       - self-hosted
       - docker
+      - c85593771c85
 
     steps:
       - name: Checkout

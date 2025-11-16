@@ -6,9 +6,9 @@ RUN apt-get update && apt-get install -y \
     && rm -rf /var/lib/apt/lists/*
 
 # 3. Create a user for the runner
-RUN useradd -m runner && mkdir -p /actions-runner && chown runner:runner /actions-runner
-USER runner
-WORKDIR /actions-runner
+# RUN useradd -m runner && mkdir -p /actions-runner && chown runner:runner /actions-runner
+# USER runner
+# WORKDIR /actions-runner
 
 # 4. Download GitHub Actions runner
 RUN curl -o runner.tar.gz -L https://github.com/actions/runner/releases/latest/download/actions-runner-linux-x64.tar.gz \
@@ -16,8 +16,9 @@ RUN curl -o runner.tar.gz -L https://github.com/actions/runner/releases/latest/d
 
 # 5. Copy entrypoint
 COPY entrypoint.sh /entrypoint.sh
-USER root
-RUN chmod +x /entrypoint.sh && chown runner:runner /entrypoint.sh
-USER runner
+# USER root
+RUN chmod +x /entrypoint.sh 
+# && chown runner:runner /entrypoint.sh
+# USER runner
 
 ENTRYPOINT ["/entrypoint.sh"]

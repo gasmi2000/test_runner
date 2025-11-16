@@ -10,7 +10,7 @@ fi
 # Configurer le runner (si pas déjà configuré)
 if [ ! -f .runner ]; then
   echo "Configuration du runner..."
-  ./config.sh --url "$RUNNER_URL" --token "$RUNNER_TOKEN" --unattended --replace
+  ./config.sh --url "$RUNNER_URL" --token "$RUNNER_TOKEN" --labels "$RUNNER_LABELS" --unattended --replace
 fi
 
 # Lancer le runner

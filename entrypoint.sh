@@ -1,31 +1,18 @@
 #!/bin/bash
 set -e
 
-if [[ -z "$GH_URL" || -z "$GH_TOKEN" ]]; then
-  echo "❌ GH_URL and GH_TOKEN must be provided"
+# Vérifier que les variables nécessaires sont présentes
+if [ -z "$RUNNER_URL" ] || [ -z "$RUNNER_TOKEN" ]; then
+  echo "❌ RUNNER_URL et RUNNER_TOKEN doivent être définis."
   exit 1
 fi
 
-# Defaults
-RUNNER_NAME=${RUNNER_NAME:-docker-runner}
-RUNNER_LABELS=${RUNNER_LABELS:-docker}
+# Configurer le runner (si pas déjà configuré)
+if [ ! -f .runner ]; then
+  echo "Configuration du runner..."
+  ./config.sh --url "$RUNNER_URL" --token "$RUNNER_TOKEN" --unattended --replace
+fi
 
-cd /actions-runner
-
-# Register runner
-./config.sh \
-  --url "$GH_URL" \
-  --token "$GH_TOKEN" \
-  --name "$RUNNER_NAME" \
-  --labels "$RUNNER_LABELS" \
-  --unattended
-
-# Deregister automatically on exit
-cleanup() {
-  echo "🧹 Removing runner..."
-  ./config.sh remove --unattended --token "$GH_TOKEN"
-}
-trap cleanup EXIT
-
-# Start runner service
-./run.sh
+# Lancer le runner
+echo "Demarrage du runner GitHub Actions..."
+exec ./run.sh

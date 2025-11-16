@@ -11,8 +11,8 @@ RUN apt-get update && apt-get install -y \
 # WORKDIR /actions-runner
 
 # 4. Download GitHub Actions runner
-RUN curl -o runner.tar.gz -L https://github.com/actions/runner/releases/latest/download/actions-runner-linux-x64.tar.gz \
-    && tar xzf runner.tar.gz && rm runner.tar.gz
+RUN curl -o runner.tar.gz -L https://github.com/actions/runner/releases/download/v2.329.0/actions-runner-linux-x64-2.329.0.tar.gz \
+    && tar xzf actions-runner-linux-x64-2.329.0.tar.gz && rm actions-runner-linux-x64-2.329.0.tar.gz
 
 # 5. Copy entrypoint
 COPY entrypoint.sh /entrypoint.sh
